@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.biblioteca.livros.entidades.Autor;
+import br.biblioteca.livros.entities.Autor;
 
 @Controller
 @RequestMapping("/autores")

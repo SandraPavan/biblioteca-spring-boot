@@ -1,9 +1,26 @@
-package br.biblioteca.livros.entidades;
+package br.biblioteca.livros.entities;
 
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Livro {
+	
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String nome;
 	private Integer quantidadePaginas;
+	
+
+	@ManyToOne
+	@JoinColumn(name = "autor_id")
+	private Autor autor; 
+	
 	
 	public Long getId() {
 		return id;
@@ -23,4 +40,11 @@ public class Livro {
 	public void setQuantidadePaginas(Integer quantidadePaginas) {
 		this.quantidadePaginas = quantidadePaginas;
 	}
+	public Autor getAutor() {
+		return autor;
+	}
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+	
 }
