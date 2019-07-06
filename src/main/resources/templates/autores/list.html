@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8" />
 <title>Autores</title>
 </head>
 <body>
 	<h1>Listagem de Autores</h1>
+	<tr th:each="autores : ${listaAutores}">
+		<td th:text="${autores.id}"></td>
+		<td><a href="#" th:href="@{'/autores/list'+${autores.id}}" th:text="${autores.nome}"> </a></td>
+	</tr>
 </body>
 </html>
