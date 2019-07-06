@@ -40,8 +40,10 @@ public class AutorController {
 	@GetMapping("/alterar/{id}")
 	public ModelAndView update(@PathVariable("id") Long id) {
 		Autor autor = autorService.buscaAutor(id);
+		ModelAndView modelAndView = new ModelAndView("autores/autor");
 		autorService.alterarAutor(autor);
-		return new ModelAndView("redirect:/autores/list");
+		modelAndView.addObject("autor", autor);
+		return modelAndView;
 	}
 
 	@GetMapping("/excluir/{id}")

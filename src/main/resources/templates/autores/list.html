@@ -7,9 +7,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 </head>
 <body>
 	<h1>Listagem de Autores</h1>
-	<tr th:each="autores : ${listaAutores}">
-		<td th:text="${autores.id}"></td>
-		<td><a href="#" th:href="@{'/autores/list'+${autores.id}}" th:text="${autores.nome}"> </a></td>
-	</tr>
+	<table>
+		<tr th:each="autores : ${listaAutores}">
+			<td th:text="${autores.id}"></td>
+			<td><a href="#" th:href="@{'/autores/list'+${autores.id}}" th:text="${autores.nome}"> </a></td>
+		</tr>
+	</table>
 </body>
 </html>
