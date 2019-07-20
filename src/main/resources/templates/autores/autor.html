@@ -7,7 +7,10 @@
 <body>
 <form th:action="@{/autores/gravar}" method="post" th:object="${autor}" action="#" >
     <input type="hidden"  th:field="*{id}" />
-    Nome: <input type="text" name="nome" th:field="*{nome}"> <br/>
+    
+    Nome: <input type="text" name="nome" th:field="*{nome}">
+    <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span><br/>
+    
     <input type="submit" value="enviar">
 </form>
 </body>
