@@ -1,15 +1,32 @@
 package br.biblioteca.livros.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-import javax.persistence.OneToMany;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-public class Role {
-	String role;
+@Entity
+public class Role implements Serializable {
 
-	@OneToMany(mappedBy = "user")
-	private List<User> user = new ArrayList<>();
+	private static final long serialVersionUID = 8851127886412536722L;
+
+	@Id
+	@GeneratedValue
+	public Long id;
+
+	public String role;
+
+	public Role() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Role(String role) {
 		this.role = role;
@@ -27,9 +44,4 @@ public class Role {
 	public String toString() {
 		return "Role [role=" + role + "]";
 	}
-
-	public void setUser(List<User> user) {
-		this.user = user;
-	}
-
 }

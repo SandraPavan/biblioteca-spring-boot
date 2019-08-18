@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Biblioteca de Livros</title>
+</head>
+<body>
+<h1 layout:fragment="header">Biblioteca</h1>
+<div layout:fragment="content" class="container">
+    <form name="f" th:action="@{/login}" method="post">
+	    <div class="form-group row">
+			<div th:if="${param.error}" class="alert alert-error"> Usuário ou senha inválido. </div>
+	    	<label for="username" class="col-sm-2 col-form-label">Login</label>
+	        <div class="col-sm-10">
+	            <input type="text" id="username" name="username" class="form-control-plaintext" />
+	        </div>
+	    	<label for="password" class="col-sm-2 col-form-label">Senha</label>
+	        <div class="col-sm-10">
+	            <input type="password" id="password" name="password" class="form-control-plaintext" />
+	        </div>
+	        <button type="submit" class="btn btn-primary">Log in</button>
+	    </div>
+    </form>
+</div>
+</body>
+</html>

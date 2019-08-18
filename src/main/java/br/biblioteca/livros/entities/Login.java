@@ -1,36 +1,33 @@
 package br.biblioteca.livros.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
-public class User {
+@Entity
+public class Login implements Serializable {
+
+	private static final long serialVersionUID = 6987502270876995514L;
+
+	@Id
 	private String username;
 
 	private String password;
 
-	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private Role role;
-
-	public Role getRole() {
-		return role;
+	public Login() {
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public User() {
-	}
-
-	public User(String username, String password) {
+	public Login(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
 
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> roles = new ArrayList<>();
 
 	public String getUsername() {

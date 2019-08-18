@@ -20,26 +20,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 
 	@Bean
-	@Override
-	protected AuthenticationManager authenticationManager() throws Exception {
-		return super.authenticationManager();
-	}
-
-	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// HABILITA O FRAME DO H2-CONSOLE
+		http.csrf().disable();
+		http.authorizeRequests().antMatchers("/h2-console").permitAll();
 		http.headers().frameOptions().disable();
 
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET, "/user/registration").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/registration").permitAll()
 				.antMatchers(HttpMethod.POST, "/user/registration").permitAll()
 				.antMatchers(HttpMethod.GET, "/user/list").hasRole("BASIC")
-				.antMatchers(HttpMethod.GET, "/user/listadmin").hasRole("ADMIN").and().formLogin()
-				.loginPage("/user/login").permitAll().and().logout().permitAll();
+				.antMatchers(HttpMethod.GET, "/user/listadmin").hasRole("ADMIN").antMatchers("/user/form**").permitAll()
+				.and().formLogin().loginPage("/login").permitAll().and().logout().logoutSuccessUrl("/").permitAll()
+				.and().requestCache();
+
 	}
 
 	@Autowired
@@ -47,4 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 }
